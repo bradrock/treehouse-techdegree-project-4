@@ -31,6 +31,8 @@ startButton.addEventListener('click', () => {
     activeGame = new Game();
 
     activeGame.startGame();
+
+    document.getElementById("overlay").classList.remove("win", "lose");
     
 });
 
