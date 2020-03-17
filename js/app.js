@@ -45,9 +45,29 @@ qwertyDiv.addEventListener('click', (event) => {
 });
 
 
+document.addEventListener('keydown', (event) => {
+
+    const code = event.keyCode;
+    
+    const alphabetEx = /[a-zA-Z]/;
+
+    if (alphabetEx.test(String.fromCharCode(code)))
+    {
+        const typedLetter = String.fromCharCode(code).toLowerCase();
 
 
+        document.querySelectorAll('#qwerty button').forEach(button => 
+            {
+                if (button.innerText == typedLetter && button.disabled == false)
+                {
+                    activeGame.handleInteraction(button);
+                }
+        
+            });
+
+    }
 
 
+});
 
 
