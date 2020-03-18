@@ -121,7 +121,7 @@
 
         if (didPlayerWin)
         {
-            gameOverMessageH1.innerText = "You won!"
+            gameOverMessageH1.innerText = "You won! The phrase was " + this.activePhrase.phrase.toUpperCase() + "."; 
             startScreenOverlay.classList.add("win");
         }
         else
