@@ -9,9 +9,10 @@
         this.phrase = phrase.toLowerCase();
     }
 
+    //Sets up the li elements corresponding to the tiles for the phrase to be guessed
     addPhraseToDisplay()
     {
-        //get phrase ul
+        
         const phraseUl = document.querySelector('#phrase ul');
         
         this.phrase.split("").forEach(char => 
@@ -36,7 +37,7 @@
         )
     }
 
-
+    //Checks whether a letter (@param {char} letter) is part of the phrase
     checkLetter(letter)
     {
         if (this.phrase.includes(letter))
@@ -50,6 +51,7 @@
 
     }
 
+    //Changes the "tile" of an unsolved letter (@param {char} letter) to one that shows the letter to the user
     showMatchedLetter(letter)
     {
         
@@ -61,15 +63,6 @@
             
             });
         
-        /*const matchedLiElements = document.querySelectorAll('li.' + letter);
-        
-        //come back later and try writing this as a forEach loop
-        for (i=0; i < matchedLiElements.length; i++)
-        {
-            matchedLiElements[i].classList.remove('hide');
-            matchedLiElements[i].classList.add('show');
-        }
-        */
     }
 
  }

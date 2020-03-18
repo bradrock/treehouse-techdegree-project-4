@@ -6,6 +6,7 @@
  {
      constructor()
      {
+        //collection of phrases from which one is selected that the user will have to guess
         this.phrases = [
 
             "rebound",
@@ -16,14 +17,14 @@
 
         ];
 
+        //number of missed/incorrect guesses by the user
         this.missed = 0;
 
+        //the phrase which the user has to guess for the current game
         this.activePhrase = null;
      }
 
-
-
-
+     //Hides the start screen overlay, gets a random phrase, and adds the phrase elements to the display
      startGame()
      {
          const startScreenOverlay = document.getElementById("overlay");
@@ -32,12 +33,19 @@
          this.activePhrase.addPhraseToDisplay();
      }
 
+     //Returns a randomly selected phrase from the phrases array.
      getRandomPhrase()
      {
         return this.phrases[Math.floor(Math.random() * (this.phrases.length))];
      }
 
 
+     
+     //Receives the button element of the player's guess and checks whether it exists in the phrase.
+     //If yes, shows the guessed letter. If no, calls for a life to be removed.
+     //Disables the letter button corresponding to the player's guess and assigns it "chosen" class
+     //if guess was a match and "wrong" class if guess was not a match (for display purposes).
+     //@param {HTMLElementObject} clickedLetterButton - The letter button corresponding to the player's guess
      handleInteraction(clickedLetterButton)
      {
         clickedLetterButton.disabled = true;
@@ -62,18 +70,16 @@
             this.removeLife();
         }
 
-        
-
-
      }
 
-
+     //Removes a life (heart) from the player and ends game if none remain
      removeLife()
      {
-        const heartElements = document.querySelectorAll('li.tries');
-
-        //come back later and try writing this as a forEach loop
+        
         //iterate through hearts until a live one is found, then replace it with a lost one
+        
+        const heartElements = document.querySelectorAll('li.tries');
+        
         for (var i=0; i < heartElements.length; i++)
         {
             if (heartElements[i].firstChild.getAttributeNode("src").value == "images/liveHeart.png")
@@ -82,6 +88,7 @@
                 break;
             }
         }
+       
         
         this.missed++;
         
@@ -93,27 +100,31 @@
      }
 
 
+
+     
+     //Checks whether player won based on whether any unsolved letters remain in the phrase
      checkForWin()
      {
         const phraseLetterLiElements = document.querySelectorAll('li.letter');
         
-        //come back later and try writing this as a forEach loop
         for (var i=0; i < phraseLetterLiElements.length; i++)
         {
             if(phraseLetterLiElements[i].classList.contains("hide"))
             {
                 return false;
             }
-          
         }
-
+       
         return true;
      }
 
 
+     
+     //Displays the game over screen with a message corresponding to either a win or loss
+     //@param {boolean} didPlayerWin - True if the player won, false if the player lost
      gameOver(didPlayerWin)
      {
-        //see if this can be put somewhere else later...maybe outside the class?
+        
         const startScreenOverlay = document.getElementById("overlay");
 
         const gameOverMessageH1 = document.getElementById("game-over-message");
@@ -132,6 +143,5 @@
 
         startScreenOverlay.style.display = "block";
      }
-
 
  }
