@@ -13,21 +13,11 @@ const startButton = document.getElementById("btn__reset");
 
 
 //Event listener for the start button
-//Resets conditions from the previous game and starts a new game
+//Starts a new game and then removes the "win" or "lose" class from the start screen in the background
 startButton.addEventListener('click', () => {
 
-    document.querySelectorAll('#phrase li').forEach(li => li.remove());
-
-    document.querySelectorAll('#qwerty button').forEach(button => 
-        {   
-            button.classList.remove("chosen", "wrong");
-            button.disabled = false;
+    document.querySelectorAll('#qwerty button').forEach(button => button.disabled = false);
         
-        });
-
-    document.querySelectorAll('li.tries').forEach(li => 
-        li.firstChild.getAttributeNode("src").value = "images/liveHeart.png");
-  
     activeGame = new Game();
 
     activeGame.startGame();
@@ -35,6 +25,7 @@ startButton.addEventListener('click', () => {
     document.getElementById("overlay").classList.remove("win", "lose");
     
 });
+
 
 
 qwertyDiv.addEventListener('click', (event) => {
@@ -71,5 +62,6 @@ document.addEventListener('keydown', (event) => {
             });
     }
 });
+
 
 

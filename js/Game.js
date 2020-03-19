@@ -121,6 +121,7 @@
 
      
      //Displays the game over screen with a message corresponding to either a win or loss
+     //and then resets the game board in the background
      //@param {boolean} didPlayerWin - True if the player won, false if the player lost
      gameOver(didPlayerWin)
      {
@@ -140,8 +141,26 @@
             gameOverMessageH1.innerText = "Sorry, better luck next time!"
             startScreenOverlay.classList.add("lose");
         }
-
+        
         startScreenOverlay.style.display = "block";
+
+
+        //reset the game board
+        document.querySelectorAll('#phrase li').forEach(li => li.remove());
+
+        document.querySelectorAll('#qwerty button').forEach(button => 
+        {   
+            button.classList.remove("chosen", "wrong");
+
+            //prevent user from typing and activating buttons while start screen is showing
+            button.disabled = true;
+        
+        });
+
+        document.querySelectorAll('li.tries').forEach(li => 
+        li.firstChild.getAttributeNode("src").value = "images/liveHeart.png");
+
+
      }
 
  }
